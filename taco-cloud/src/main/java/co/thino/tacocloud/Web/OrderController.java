@@ -1,4 +1,4 @@
-package co.thino.tacocloud.Web;
+package co.thino.tacocloud.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

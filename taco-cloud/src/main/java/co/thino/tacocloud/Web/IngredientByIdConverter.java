@@ -1,16 +1,15 @@
-package co.thino.tacocloud.Web;
-
-import java.util.HashMap;
-import java.util.Map;
+package co.thino.tacocloud.web;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
+
 import co.thino.tacocloud.Ingredient;
-import co.thino.tacocloud.Ingredient.Type;
+import co.thino.tacocloud.data.IngredientRepository;
 
 @Component
 public class IngredientByIdConverter implements Converter<String, Ingredient> {
 
+    /* 
     private Map<String, Ingredient> ingredientMap = new HashMap<>();
 
     public IngredientByIdConverter() {
@@ -39,5 +38,17 @@ public class IngredientByIdConverter implements Converter<String, Ingredient> {
     @Override
     public Ingredient convert(String id) {
         return ingredientMap.get(id);
+    }
+    */
+
+    private IngredientRepository ingredientRepo;
+
+    public IngredientByIdConverter(IngredientRepository ingredientRepo) {
+        this.ingredientRepo = ingredientRepo;
+    }
+
+   @Override
+    public Ingredient convert(String id) {
+        return ingredientRepo.findById(id).orElse(null);
     }
 }
